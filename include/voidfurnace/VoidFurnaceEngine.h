@@ -3,6 +3,7 @@
 #include "voidfurnace/VoidFurnaceDspPrimitives.h"
 
 #include <array>
+#include <memory>
 
 namespace voidfurnace
 {
@@ -34,6 +35,8 @@ private:
 public:
     static constexpr int lineCount = 4;
 private:
+    using DelayLine = std::array<float, maxDelaySamples>;
+    using DelayStorage = std::array<DelayLine, lineCount>;
 
     struct ClampedParameters
     {
@@ -53,7 +56,7 @@ private:
 
     ClampedParameters params;
     double sampleRate = 44100.0;
-    std::array<std::array<float, maxDelaySamples>, lineCount> lines {};
+    std::unique_ptr<DelayStorage> lines;
     std::array<float, lineCount> damped {};
     int writeIndex = 0;
     int sampleCounter = 0;

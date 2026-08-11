@@ -12,6 +12,7 @@ constexpr std::array<int, VoidFurnaceEngine::lineCount> baseLengths {{ 1499, 213
 }
 
 VoidFurnaceEngine::VoidFurnaceEngine()
+    : lines (std::make_unique<DelayStorage>())
 {
     prepare (44100.0);
     reset();
@@ -25,7 +26,7 @@ void VoidFurnaceEngine::prepare (double newSampleRate) noexcept
 
 void VoidFurnaceEngine::reset() noexcept
 {
-    for (auto& line : lines)
+    for (auto& line : *lines)
         line.fill (0.0f);
     damped.fill (0.0f);
     writeIndex = 0;
@@ -77,7 +78,7 @@ StereoFrame VoidFurnaceEngine::processSample (float inputLeft, float inputRight)
     {
         const auto sign = (i & 1) == 0 ? 1.0f : -1.0f;
         const auto injected = mono * (0.20f + params.density * 0.42f) + velvet * sign;
-        lines[static_cast<std::size_t> (i)][static_cast<std::size_t> (writeIndex)] =
+        (*lines)[static_cast<std::size_t> (i)][static_cast<std::size_t> (writeIndex)] =
             sanitizeAudio (injected + hadamard[static_cast<std::size_t> (i)] * feedback * 0.5f);
     }
     writeIndex = (writeIndex + 1) % maxDelaySamples;
@@ -108,7 +109,7 @@ float VoidFurnaceEngine::readLine (int line, int delaySamples) const noexcept
     auto index = writeIndex - delaySamples;
     while (index < 0)
         index += maxDelaySamples;
-    return lines[static_cast<std::size_t> (line)][static_cast<std::size_t> (index)];
+    return (*lines)[static_cast<std::size_t> (line)][static_cast<std::size_t> (index)];
 }
 
 float VoidFurnaceEngine::velvetImpulse() noexcept
