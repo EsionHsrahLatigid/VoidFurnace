@@ -237,7 +237,7 @@ yup::AudioProcessorEditor* VoidFurnacePlugin::createEditor()
     return new ParameterGridEditor (*this,
                                     "VoidFurnace",
                                     "Hadamard FDN reverb with standalone-only audition.",
-                                    0xffd8d8d8u);
+                                    0xfff2f2f0u);
 #endif
 }
 
