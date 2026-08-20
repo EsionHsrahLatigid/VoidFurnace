@@ -4,7 +4,6 @@
 - Status: Active
 - Last refreshed: 2026-08-12
 - Primary product surfaces: YUP Standalone, VST3, AUv2 editor
-- Evidence reviewed: feedback-delay-network and dark-velvet-noise references plus the nine-effect Digital Harsh Noise UI survey
 
 ## Brand
 - Personality: black furnace chamber; deep, metallic, and severe.

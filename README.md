@@ -1,6 +1,5 @@
 # VoidFurnace
 
-VoidFurnace is a YUP stereo reverb built for Digital Harsh Noise rather than polite ambience. Four unequal delay lines, normalized Hadamard feedback mixing, frequency-dependent loop damping, sparse deterministic velvet impulses, stereo decorrelation, and bounded drive form a dark metallic chamber. Hosted builds preserve silence; Standalone adds an audition source and meters only at compile time.
 
 ## Identity and formats
 
